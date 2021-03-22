@@ -1,0 +1,57 @@
+{%if items.paginator.count > 0 %}
+<!-- ページネーション -->
+<nav>
+  <ul class="pagination">
+  
+    <!-- 前へ  -->
+    {% if items.has_previous %}
+      <li class="page-item">
+         <a class="page-link" href="?page={{ items.previous_page_number }}{{ search_param }}" rel="prev" aria-label="&lsaquo; Previous">&lsaquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled" aria-disabled="true" aria-label="&lsaquo; Previous">
+         <span class="page-link" aria-hidden="true">&lsaquo;</span>
+      </li>
+    {% endif %}
+
+    <!-- 最初のページ --> 
+    {% if items.number > 3 %}
+      <li class="page-item"><a class="page-link" href="?page=1{{ search_param }}">1</a></li>
+    {% endif %}
+    <!-- 省略記号(...) --> 
+    {% if items.number > 4 %} 
+      <li class="page-item disabled" aria-disabled="true"><span class="page-link" aria-hidden="true">&hellip;</span></li>
+    {% endif %}
+    
+    <!-- 中央 -->
+    {% for no in items.paginator.page_range %}
+      {% if items.number == no %}
+        <li class="page-item active" aria-current="page"><span class="page-link">{{ items.number }}</span></li>
+      {% elif items.number|add:'-3' < no and no < items.number|add:'3' %}      
+        <li class="page-item"><a class="page-link" href="?page={{ no }}{{ search_param }}">{{ no }}</a></li>
+      {% endif %}
+    {% endfor %}    
+      
+    <!-- 省略記号(...) -->    
+    {% if items.number|add:'3' < items.paginator.num_pages %} 
+      <li class="page-item disabled" aria-disabled="true"><span class="page-link" aria-hidden="true">&hellip;</span></li>
+    {% endif %} 
+    <!-- 最後のページ -->
+    {% if items.number|add:'2' < items.paginator.num_pages %}  
+      <li class="page-item"><a class="page-link" href="?page={{ items.paginator.num_pages }}{{ search_param }}">{{ items.paginator.num_pages }}</a></li>
+    {% endif %}
+
+    <!-- 次へ  -->
+    {% if items.has_next %}
+      <li class="page-item">
+         <a class="page-link" href="?page={{ items.next_page_number }}{{ search_param }}" rel="next" aria-label="Next &rsaquo;">&rsaquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled" aria-disabled="true" aria-label="Next &rsaquo;">
+         <span class="page-link" aria-hidden="true">&rsaquo;</span>
+      </li>
+    {% endif %}      
+  </ul>
+</nav>
+{% endif %}
+<p>{{ message|safe }}</p>

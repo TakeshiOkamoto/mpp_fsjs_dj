@@ -1,0 +1,86 @@
+<input type="hidden" name="yyyy" value="{{ form.yyyy.value }}">
+
+<div class="alert alert-primary" role="alert">日付</div> 
+<p></p>
+<h5>{{ form.yyyy.value }}年</h5>
+<p></p>
+<div class="form-group">
+  <label for="journal_mm">月</label>
+  {% if form.mm.errors.as_text == '' %}
+    <input type="number" class="form-control" id="journal_mm" name="mm" value="{{ form.mm.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="journal_mm" name="mm" value="{{ form.mm.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.mm.errors.as_text }}</div>
+  {% endif %}
+</div>   
+
+<div class="form-group">
+  <label for="journal_dd">日</label>
+  {% if form.dd.errors.as_text == '' %}
+    <input type="number" class="form-control" id="journal_dd" name="dd" value="{{ form.dd.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="journal_dd" name="dd" value="{{ form.dd.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.dd.errors.as_text }}</div>
+  {% endif %}
+</div>
+
+<div class="alert alert-primary" role="alert">借方 <span class="sp"><br></span>※大まかに言うとプラスのイメージ</div>
+<div class="form-group">
+  {% if form.debit_account_id.errors.as_text == '' %}
+     <select id="journal_debit_account_id" class="form-control col-sm-3" name="debit_account_id">
+  {% else %}
+     <select id="journal_debit_account_id" class="form-control is-invalid col-sm-3" name="debit_account_id">
+  {% endif %}
+        <option value= "">選択してください。</option>
+        {% for item in combo_debit %}
+          {% if form.debit_account_id.value == item.id|stringformat:"i" or form.debit_account_id.value == item.id  %}
+            <option value= "{{ item.id }}" selected="selected">{{ item.name }}</option>
+          {% else %}
+            <option value= "{{ item.id }}">{{ item.name }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+      <div class="text-danger" style="font-size:90%">{{ form.debit_account_id.errors.as_text }}</div>
+</div>
+
+<div class="alert alert-primary" role="alert">貸方 <span class="sp"><br></span>※大まかに言うとマイナスのイメージ</div>
+<div class="form-group">
+  {% if form.credit_account_id.errors.as_text == '' %}
+     <select id="journal_credit_account_id" class="form-control col-sm-3" name="credit_account_id">
+  {% else %}
+     <select id="journal_credit_account_id" class="form-control is-invalid col-sm-3" name="credit_account_id">
+  {% endif %}
+        <option value= "">選択してください。</option>
+        {% for item in combo_credit %}
+          {% if form.credit_account_id.value == item.id|stringformat:"i" or form.credit_account_id.value == item.id  %}
+            <option value= "{{ item.id }}" selected="selected">{{ item.name }}</option>
+          {% else %}
+            <option value= "{{ item.id }}">{{ item.name }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+      <div class="text-danger" style="font-size:90%">{{ form.credit_account_id.errors.as_text }}</div>      
+</div> 
+
+<div class="alert alert-primary" role="alert">金額</div>  
+<div class="form-group">
+  {% if form.money.errors.as_text == '' %}
+    <input type="number" class="form-control" id="journal_money" name="money" value="{{ form.money.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="journal_money" name="money" value="{{ form.money.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.money.errors.as_text }}</div>
+  {% endif %}
+</div>
+
+<div class="alert alert-primary" role="alert">摘要</div>   
+<p>(例)1/24 ご依頼○○様、○○広告収入、○○銀行、 クレジットカード(○○代)、○○引き落とし、携帯通信料金(按分50%)など</p>   
+<div class="form-group">
+  {% if form.summary.errors.as_text == '' %}
+    <input type="text" class="form-control" id="journal_summary" name="summary" value="{{ form.summary.value }}">
+  {% else %}
+    <input type="text" class="form-control is-invalid" id="journal_summary" name="summary" value="{{ form.summary.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.summary.errors.as_text }}</div>
+  {% endif %}
+</div>
+
+<p><br></p>

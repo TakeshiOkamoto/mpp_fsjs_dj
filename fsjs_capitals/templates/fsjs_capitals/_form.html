@@ -1,0 +1,52 @@
+<div class="form-group">
+  <label for="capital_yyyy">年 ※西暦4桁</label>
+  {% if form.yyyy.errors.as_text == '' %}
+    <input type="number" class="form-control" id="capital_yyyy" name="yyyy" value="{{ form.yyyy.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="capital_yyyy" name="yyyy" value="{{ form.yyyy.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.yyyy.errors.as_text }}</div>
+  {% endif %}
+</div>
+
+<div class="alert alert-primary" role="alert">以下の4項目は1月1日(期首) 時点の「元入金」の金額を入力します。<br>※ない場合は0を入力。繰越の場合は前年の12/31(期末)の金額を入力。</div>
+
+<div class="form-group">
+  <label for="capital_m1">現金</label>
+  {% if form.m1.errors.as_text == '' %}
+    <input type="number" class="form-control" id="capital_m1" name="m1" value="{{ form.m1.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="capital_m1" name="m1" value="{{ form.m1.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.m1.errors.as_text }}</div>
+  {% endif %}
+</div>
+
+<div class="form-group">
+  <label for="capital_m2">その他の預金 ※通帳の残高</label>
+  {% if form.m2.errors.as_text == '' %}
+    <input type="number" class="form-control" id="capital_m2" name="m2" value="{{ form.m2.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="capital_m2" name="m2" value="{{ form.m2.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.m2.errors.as_text }}</div>
+  {% endif %}
+</div>
+
+<div class="form-group">
+  <label for="capital_m3">前払金 ※電子マネーの前払金など</label>
+  {% if form.m3.errors.as_text == '' %}
+    <input type="number" class="form-control" id="capital_m3" name="m3" value="{{ form.m3.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="capital_m3" name="m3" value="{{ form.m3.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.m3.errors.as_text }}</div>
+  {% endif %}
+</div>
+
+<div class="form-group">
+  <label for="capital_m4">未払金 ※クレジットカードの未払金など</label>
+  {% if form.m4.errors.as_text == '' %}
+    <input type="number" class="form-control" id="capital_m4" name="m4" value="{{ form.m4.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="capital_m4" name="m4" value="{{ form.m4.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.m4.errors.as_text }}</div>
+  {% endif %}
+</div>
+<p></p>

@@ -1,0 +1,34 @@
+{% extends 'layouts/fsjs_layout.html' %}
+
+{% block title %}仕訳 - 新規登録{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_capitals:index' %}">会計年度</a></li>
+    <li class="breadcrumb-item active">仕訳の新規登録</li>
+  </ol> 
+</nav>  
+<p></p>
+<h1>仕訳の新規登録</h1>
+<p></p>
+
+<form action="{% url 'fsjs_journals:create' %}" method="post">
+  {% csrf_token %}
+  {% include 'fsjs_journals/_form.html' %}
+  <input type="submit" value="登録する"  class="btn btn-primary" onclick="DisableButton(this);">
+</form>
+
+<p><br></p>
+<a href="{% url 'fsjs_journals:index' %}?yyyy={{ form.yyyy.value }}">戻る</a>
+<p></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_capitals:index' %}">会計年度</a></li>
+    <li class="breadcrumb-item active">仕訳の新規登録</li>
+  </ol> 
+</nav>  
+<p></p>
+{% endblock %}    

@@ -1,0 +1,21 @@
+/* Media Queries 769px以上 */
+@media screen and (min-width: 769px){
+  .pc{
+    
+  }
+
+  .sp{
+    display:none;
+  }
+}
+
+/* Media Queries 768px以下 */
+@media screen and (max-width:768px){  
+  .pc{
+    display:none;
+  }
+
+  .sp{
+    
+  }
+}

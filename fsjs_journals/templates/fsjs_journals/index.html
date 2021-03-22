@@ -1,0 +1,109 @@
+{% extends 'layouts/fsjs_layout.html' %}
+
+{% block title %}仕訳帳{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_capitals:index' %}">会計年度</a></li>
+    <li class="breadcrumb-item active">仕訳帳</li>
+  </ol> 
+</nav>
+<p></p>
+<h1>仕訳帳({{ yyyy }}年)</h1>
+<p>仕訳は1/1から順番に登録して下さい。現金、その他の預金、前払金、未払金は入力誤り判定機能付きです。</p>
+<p><a href="{% url 'fsjs_journals:create' %}?yyyy={{ yyyy }}" class="btn btn-primary">仕訳の新規登録</a></p>
+
+<h5>[ 基本情報 ]</h5>
+<table class="table table-hover">
+  <tbody class="thead-default">
+    <tr>
+      <th style="width:120px;">元入金</th>
+      <td>
+          現金 : {{ capital.m1 }} 
+          その他の預金 : {{ capital.m2 }} 
+          前払金 : {{ capital.m3 }} 
+          未払金 : {{ capital.m4 }} 
+      </td>
+    </tr>  
+    <tr>
+      <th>12/31<span class="sp"><br></span>(期末)</th>
+      <td>
+          現金 : {{ term_end.money }} 
+          その他の預金 : {{ term_end.deposit }} 
+          前払金 : {{ term_end.advance_payment }} 
+          未払金 : {{ term_end.accounts_payable }} 
+          売上 : {{ term_end.sales }} 
+      </td>
+    </tr>      
+  </tbody>
+</table>
+
+<h5>[ 仕訳 ]</h5>  
+<table class="table table-hover pc">
+  <thead class="thead-default">
+    <tr>
+      <th>日付</th>
+      <th>借方</th>
+      <th>貸方</th>
+      <th>金額</th>
+      <th style="width:300px;">摘要</th>
+      <th></th>  
+    </tr>
+  </thead>
+  <tbody class="thead-default">
+    {% for item in items %}
+    <tr>
+      <td><a href="{% url 'fsjs_journals:show' item.id %}">{{ item.mmdd }}</a></td>
+      <td>{{ item.debit }}</td>
+      <td>{{ item.credit }}</td>
+      <td>{{ item.money }}</td>
+      <td>{{ item.summary }}</td>
+      <td style="width:170px;">
+        <a href="{% url 'fsjs_journals:edit' item.id %}" class="btn btn-primary">編集</a>
+        &nbsp;&nbsp;
+        <a href="#" onclick="ajax_delete('「{{ item.mmdd }}」を削除します。よろしいですか？','{% url 'fsjs_journals:delete' item.id %}','{% url 'fsjs_journals:index' %}?yyyy={{ yyyy}}');return false;" class="btn btn-danger">削除</a>
+      </td>            
+    </tr>    
+    {% endfor %}
+  </tbody>    
+</table>
+
+<table class="table table-hover sp">
+  <thead class="thead-default">
+    <tr>
+      <th>日付</th>
+      <th>仕訳</th>
+    </tr>
+  </thead>
+  <tbody class="thead-default">
+    {% for item in items %}
+    <tr>
+      <td><a href="{% url 'fsjs_journals:show' item.id %}">{{ item.mmdd }}</a></td>
+      <td>
+        {{ item.debit }} {{ item.credit }}<br>
+        {{ item.money }}<br>
+        <span class="text-muted" style="font-size:90%">{{ item.summary }}</span><br>
+        <p></p>
+        <a href="{% url 'fsjs_journals:edit' item.id %}" class="btn btn-primary">編集</a>
+        &nbsp;&nbsp;
+        <a href="#" onclick="ajax_delete('「{{ item.mmdd }}」を削除します。よろしいですか？','{% url 'fsjs_journals:delete' item.id %}','{% url 'fsjs_journals:index' %}?yyyy={{ yyyy}}');return false;" class="btn btn-danger">削除</a>
+      </td>
+    </tr>    
+    {% endfor %}
+  </tbody>    
+</table>
+
+{% include 'pagination.html' %}
+
+<p><br></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_capitals:index' %}">会計年度</a></li>
+    <li class="breadcrumb-item active">仕訳帳</li>
+  </ol> 
+</nav>
+<p></p>
+{% endblock %}    

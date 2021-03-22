@@ -1,0 +1,78 @@
+{% extends 'layouts/fsjs_layout.html' %}
+
+{% block title %}会計年度{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item active">会計年度</li>     
+  </ol> 
+</nav>    
+<p></p>
+<h1>会計年度</h1>
+<p>「元入金」とは新規開業または前年からの繰越の金額です。</p>
+
+<table class="table table-hover pc">
+  <thead class="thead-default">
+    <tr>
+      <th style="width:100px;"></th>
+      <th></th>
+      <th>元入金</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody class="thead-default">
+    {% for item in items %}
+    <tr>
+      <td><a href="{% url 'fsjs_journals:index' %}?yyyy={{ item.yyyy }}" class="btn btn-outline-info">仕訳帳</a></td>
+      <td>{{ item.yyyy }}年</td>
+      <td>現金 {{ item.m1 }} 
+          その他の預金  {{ item.m2 }}
+          前払金 {{ item.m3 }}  
+          未払金 {{ item.m4 }} </td>
+      <td style="width:170px;">
+        <a href="{% url 'fsjs_capitals:edit' item.id %}" class="btn btn-primary">編集</a>
+        &nbsp;&nbsp;
+        <a href="#" onclick="ajax_delete('「{{ item.yyyy }}年」を削除します。よろしいですか？','{% url 'fsjs_capitals:delete' item.id %}','{% url 'fsjs_capitals:index' %}');return false;" class="btn btn-danger">削除</a>
+      </td>            
+    </tr>    
+    {% endfor %}
+  </tbody>    
+</table>
+
+<table class="table table-hover sp">
+  <tbody class="thead-default">
+    {% for item in items %}
+    <tr>
+      <td>
+         <a href="{% url 'fsjs_journals:index' %}?yyyy={{ item.yyyy }}" class="btn btn-outline-info">仕訳帳 ({{ item.yyyy }}年)</a>
+         <p></p>
+          &lt;元入金&gt;<br>
+          ・現金 {{ item.m1 }}<br> 
+          ・その他の預金  {{ item.m2 }}<br> 
+          ・前払金 {{ item.m3 }}<br> 
+          ・未払金 {{ item.m4 }}
+          <p></p> 
+          <a href="{% url 'fsjs_capitals:edit' item.id %}" class="btn btn-primary">編集</a>
+          &nbsp;&nbsp;
+          <a href="#" onclick="ajax_delete('「{{ item.yyyy }}年」を削除します。よろしいですか？','{% url 'fsjs_capitals:delete' item.id %}','{% url 'fsjs_capitals:index' %}');return false;" class="btn btn-danger">削除</a>
+      </td>
+    </tr>    
+    {% endfor %}
+  </tbody>    
+</table>
+
+{% include 'pagination.html' %}
+
+<p></p>
+<a href="{% url 'fsjs_capitals:create' %}" class="btn btn-primary">会計年度の新規登録</a>
+<p><br></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item active">会計年度</li>     
+  </ol> 
+</nav>    
+<p></p>
+{% endblock %}    

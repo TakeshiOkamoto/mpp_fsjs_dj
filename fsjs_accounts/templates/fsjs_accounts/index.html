@@ -1,0 +1,71 @@
+{% extends 'layouts/fsjs_layout.html' %}
+
+{% block title %}勘定科目{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item active">勘定科目</li>     
+  </ol> 
+</nav>    
+<p></p>
+<h1>勘定科目</h1>
+<p>この画面は<span style="color:red;">システム設定</span>です。複式簿記がわからない方は操作しないでください。</p>
+<p>「損益計算書」で利用できる経費の科目は全て登録済みです。その他に必要であれば追加して下さい。<br>
+※不要な経費の科目は削除して頂いても構いません。<br>
+※誤って変更した場合は「python manage.py loaddata account.json」を実行すればデータを復元できます。</p>
+
+<form action="{% url 'fsjs_accounts:index' %}" method="get">
+  <div class="input-group">
+    <input type="search" name="name" class="form-control" placeholder="検索したい名前を入力" value="{{ form.name.value }}">
+    <span class="input-group-btn">
+      <input type="submit" value="検索" class="btn btn-outline-info"> 
+    </span>
+  </div>
+</form>
+
+<p></p>
+
+<table class="table table-hover">
+  <thead class="thead-default">
+    <tr>
+      <th>名前</th>
+      <th class="pc">種類</th>
+      <th class="pc">経費フラグ</th>
+      <th class="pc">表示順序(リスト用)</th>
+      <th class="pc">表示順序(経費用)</th>
+      <th></th>  
+    </tr>
+  </thead>
+  <tbody class="thead-default">
+    {% for item in items %}
+    <tr>
+      <td><a href="{% url 'fsjs_accounts:show' item.id %}">{{ item.name }}</a></td>
+      <td class="pc">{{ item.types }}</td>
+      <td class="pc">{{ item.expense_flg }}</td>
+      <td class="pc">{{ item.sort_list }}</td>
+      <td class="pc">{{ item.sort_expense }}</td>
+      <td style="width:170px;">
+        <a href="{% url 'fsjs_accounts:edit' item.id %}" class="btn btn-primary">編集</a>
+        &nbsp;&nbsp;
+        <a href="#" onclick="ajax_delete('「{{ item.name|addslashes }}」を削除します。よろしいですか？','{% url 'fsjs_accounts:delete' item.id %}','{% url 'fsjs_accounts:index' %}');return false;" class="btn btn-danger">削除</a>
+      </td>            
+    </tr>    
+    {% endfor %}
+  </tbody>    
+</table>
+
+{% include 'pagination.html' %}
+
+<p></p>
+<a href="{% url 'fsjs_accounts:create' %}" class="btn btn-primary">勘定科目の新規登録</a>
+<p><br></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item active">勘定科目</li>     
+  </ol> 
+</nav>    
+<p></p>
+{% endblock %}    

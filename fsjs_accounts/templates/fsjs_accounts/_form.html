@@ -1,0 +1,55 @@
+<div class="form-group">
+  <label for="account_name">名前</label>
+  {% if form.name.errors.as_text == '' %}
+    <input type="text" class="form-control" id="account_name" name="name" value="{{ form.name.value }}">
+  {% else %}
+    <input type="text" class="form-control is-invalid" id="account_name" name="name" value="{{ form.name.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.name.errors.as_text }}</div>
+  {% endif %}
+</div>    
+  
+<div class="form-group">
+  <label for="account_types">種類</label>
+  {% if form.types.errors.as_text == '' %}
+     <select id="account_types" class="form-control col-sm-3" name="types">
+  {% else %}
+     <select id="account_types" class="form-control is-invalid col-sm-3" name="types">
+  {% endif %}
+        <option value= "">選択してください。</option>
+        {% for item in combo_types %}
+          {% if form.types.value == item.id|stringformat:"i" or form.types.value == item.id  %}
+            <option value= "{{ item.id }}" selected="selected">{{ item.name }}</option>
+          {% else %}
+            <option value= "{{ item.id }}">{{ item.name }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>   
+</div> 
+
+<div class="form-group" style="float: left;">
+  <label for="account_expense_flg">経費フラグ</label>
+  <input type="checkbox" class="form-control" id="account_expense_flg" name="expense_flg" value="1" {% if form.expense_flg.value == True %} checked="checked" {% endif %}>
+</div>  
+<div style="clear:both;"></div>
+
+<div class="form-group">
+  <label for="account_sort_list">表示順序(リスト用)</label>
+  {% if form.sort_list.errors.as_text == '' %}
+    <input type="number" class="form-control" id="account_sort_list" name="sort_list" value="{{ form.sort_list.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="account_sort_list" name="sort_list" value="{{ form.sort_list.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.sort_list.errors.as_text }}</div>
+  {% endif %}
+</div>
+    
+<div class="form-group">
+  <label for="account_sort_expense">表示順序(経費用)</label>
+  {% if form.sort_expense.errors.as_text == '' %}
+    <input type="number" class="form-control" id="account_sort_expense" name="sort_expense" value="{{ form.sort_expense.value }}">
+  {% else %}
+    <input type="number" class="form-control is-invalid" id="account_sort_expense" name="sort_expense" value="{{ form.sort_expense.value }}">
+    <div class="text-danger" style="font-size:90%">{{ form.sort_expense.errors.as_text }}</div>
+  {% endif %}
+</div>
+
+<p></p>

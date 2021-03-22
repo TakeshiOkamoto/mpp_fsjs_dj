@@ -1,0 +1,34 @@
+{% extends 'layouts/fsjs_layout.html' %}
+
+{% block title %}勘定科目 - 新規登録{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_accounts:index' %}">勘定科目</a></li> 
+    <li class="breadcrumb-item active">新規作成</li>
+  </ol> 
+</nav>    
+<p></p>
+<h1>新規登録 - 勘定科目</h1>
+<p></p>
+
+<form action="{% url 'fsjs_accounts:create' %}" method="post">
+  {% csrf_token %}
+  {% include 'fsjs_accounts/_form.html' %}
+  <input type="submit" value="登録する"  class="btn btn-primary">
+</form>
+
+<p><br></p>
+<a href="{% url 'fsjs_accounts:index' %}">戻る</a>
+<p></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_accounts:index' %}">勘定科目</a></li> 
+    <li class="breadcrumb-item active">新規作成</li>
+  </ol> 
+</nav>    
+<p></p>
+{% endblock %}    

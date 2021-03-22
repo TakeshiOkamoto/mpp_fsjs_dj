@@ -1,0 +1,58 @@
+{% extends 'layouts/fsjs_layout.html' %}
+
+{% block title %}勘定科目 - 表示{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_accounts:index' %}">勘定科目</a></li> 
+    <li class="breadcrumb-item active">表示</li>
+  </ol> 
+</nav>    
+<p></p>
+<h1>{{ item.name }}</h1>
+<p></p>
+
+<p>
+  <strong>種類 : </strong>
+  {{ item.types }}
+</p>
+
+<p>
+  <strong>経費フラグ : </strong>
+  {{ item.expense_flg }}
+</p>
+
+<p>
+  <strong>表示順序(リスト用) : </strong>
+  {{ item.sort_list }}
+</p>
+
+<p>
+  <strong>表示順序(経費用) : </strong>
+  {{ item.sort_expense }}
+</p>
+
+<p>
+  <strong>作成日時 : </strong>
+  {{ item.created_at|date:'Y-m-d H:i:s' }}
+</p>
+
+<p>
+  <strong>更新日時 : </strong>
+  {{ item.updated_at|date:'Y-m-d H:i:s' }}
+</p>
+
+
+<a href="{% url 'fsjs_accounts:edit' item.id %}">編集</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{% url 'fsjs_accounts:index' %}">戻る</a>
+<p></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_accounts:index' %}">勘定科目</a></li> 
+    <li class="breadcrumb-item active">表示</li>
+  </ol> 
+</nav>    
+<p></p>
+{% endblock %}    

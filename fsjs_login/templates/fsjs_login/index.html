@@ -1,0 +1,22 @@
+{% extends 'layouts/fsjs_layout.html' %}
+
+{% block title %}ログイン{% endblock %}
+
+{% block content %}
+<p></p>
+<h1>ログイン</h1>
+<p></p>
+<form action="{% url 'fsjs_login:login' %}" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="user_email">メールアドレス</label>
+    <input type="text" class="form-control" id="user_email" name="email">
+  </div>     
+  <div class="form-group">
+    <label for="user_password">パスワード</label>
+    <input type="password" class="form-control" id="user_password" name="password">
+  </div>    
+  <input type="submit" value="ログインする"  class="btn btn-primary" onclick="DisableButton(this);">
+</form>
+<p><br></p>
+{% endblock %} 

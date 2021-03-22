@@ -1,0 +1,52 @@
+{% extends 'layouts/fsjs_layout.html' %}
+
+{% block title %}仕訳 - 表示{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_capitals:index' %}">会計年度</a></li>
+    <li class="breadcrumb-item active">仕訳の表示</li>
+  </ol> 
+</nav>
+
+<p></p>
+<table class="table table-hover">
+  <tbody class="thead-default">
+    <tr>
+      <th>日付</th><td>{{ item.ymd }}</td>
+    </tr>
+    <tr>
+      <th>借方</th><td>{{ item.debit }}</td>
+    </tr>
+    <tr>
+      <th>貸方</th><td>{{ item.credit }}</td>
+    </tr>
+    <tr>
+      <th>金額</th><td>{{ item.money }}</td>
+    </tr>
+    <tr>
+      <th>摘要</th><td>{{ item.summary }}</td>
+    </tr>    
+    <tr>
+      <th>作成日時</th><td>{{ item.created_at|date:'Y-m-d H:i:s' }}</td>
+    </tr> 
+    <tr>
+      <th>更新日時</th><td>{{ item.updated_at|date:'Y-m-d H:i:s' }}</td>
+    </tr>                           
+  </tbody>
+</table>
+<p></p>
+
+<a href="{% url 'fsjs_journals:edit' item.id %}">編集</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{% url 'fsjs_journals:index' %}?yyyy={{ item.yyyy }}">戻る</a>
+<p></p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_main:index' %}">ホーム</a></li> 
+    <li class="breadcrumb-item"><a href="{% url 'fsjs_capitals:index' %}">会計年度</a></li>
+    <li class="breadcrumb-item active">仕訳の表示</li>
+  </ol> 
+</nav>
+<p></p>
+{% endblock %}    

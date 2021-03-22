@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>{% block title %}{% endblock %}</title>
+<meta name="keywords" content="{% block keywords %}{% endblock %}">
+<meta name="description" content="{% block description %}{% endblock %}">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+<meta name="csrf-token" content="{{ csrf_token }}">
+<link rel="stylesheet" media="all" href="{% static '/css/bootstrap.min.css' %}">
+<link rel="stylesheet" media="all" href="{% static '/css/terminal.css' %}">
+<script src="{% static '/js/common.js' %}"></script>
+</head>
+<body>
+
+<!-- ヘッダ -->
+<nav class="navbar navbar-expand-md navbar-light bg-primary">
+  <div class="navbar-brand text-white">
+    青色申告決算書 &amp; 仕訳帳システム
+  </div>
+  <ul class="navbar-nav ml-auto">
+    {% if 'name' in request.session %}
+      <li class="nav-item">
+        <a class="nav-link" style="color:#fff;" href="{% url 'fsjs_main:index' %}">ホーム</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="color:#fff;" href="{% url 'fsjs_capitals:index' %}">会計年度</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="color:#fff;" href="{% url 'fsjs_accounts:index' %}">勘定科目</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="color:#fff;" href="{% url 'fsjs_login:loguot' %}">ログアウト</a>
+      </li>
+    {% endif %}
+  </ul>  
+</nav>
+<div class="container">
+  <!-- フラッシュ -->
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.tags == 'success' %} 
+        <div class="alert alert-success" onclick="this.classList.add('d-none')" id="msg_notice">{{ message }}</div>
+      {% else %}
+        <div class="alert alert-danger" onclick="this.classList.add('d-none')" id="msg_alert">{{ message }}</div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+  <!-- メイン -->
+  <div>
+    {% block content %}{% endblock %}
+  </div>
+  
+  <!-- フッタ -->
+  <nav class="container bg-primary p-2 text-center">
+    <div class="text-center text-white">
+      Financial Statements &amp; Journal System<br>
+      Copyright 2021 Takeshi Okamoto All Rights Reserved.
+    </div>
+  </nav> 
+</div>
+</body>
+</html>
