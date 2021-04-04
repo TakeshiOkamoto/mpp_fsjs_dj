@@ -4,7 +4,7 @@
 初心者でも扱いやすいように基本的な「仕訳の記入例」を付属しています。　
   
 DEMO    
-[https://www.petitmonte.com/django/fsjs/](https://www.petitmonte.com/django/fsjs/)  
+[https://www.petitmonte.com/ai/fsjs/](https://www.petitmonte.com/ai/fsjs/)  
   
 主な対象は「広告収入」や「業務請負」など仕訳が単純な方用です。  
 ※小売業や製造原価には対応していません。   
