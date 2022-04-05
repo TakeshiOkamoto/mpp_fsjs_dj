@@ -102,6 +102,13 @@ exit()
 cd プロジェクトディレクトリ
 python manage.py migrate
 ```
+
+### シーディング
+次のコマンドを実行して勘定科目のデータを自動登録します。  
+```rb
+python manage.py loaddata account.json
+```
+
 ### 管理者アカウントの作成
 次のコマンドを実行する。
 ```rb
